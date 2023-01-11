@@ -11,12 +11,32 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
+interface NavbarProps {
+  avatarClicked: boolean;
+  setAvatarClicked: (value: (val: boolean) => boolean) => void;
+}
+
 const pages = ["Home", "Search"];
 
-const Navbar = () => {
+const Navbar = ({ avatarClicked, setAvatarClicked }: NavbarProps) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
+
+  const toggleAvatarClicked = () => {
+    // if (avatarClicked) setAvatarClicked(false);
+    // if (!avatarClicked) setAvatarClicked(true);
+
+    // if (avatarClicked === false) {
+    //   setAvatarClicked(true);
+    // } else {
+    //   setAvatarClicked(false);
+    // }
+
+    setAvatarClicked((previousState) => !previousState);
+    // setCount(previousCount => previousCount + 1)
+    // setCount(count + 1)
+  };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -66,6 +86,7 @@ const Navbar = () => {
               ))}
             </Menu>
           </Box>
+
           <Typography
             variant="h5"
             noWrap
@@ -95,8 +116,9 @@ const Navbar = () => {
               </Button>
             ))}
           </Box>
+
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton sx={{ p: 0 }}>
+            <IconButton sx={{ p: 0 }} onClick={toggleAvatarClicked}>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
             </IconButton>
           </Box>
@@ -105,4 +127,5 @@ const Navbar = () => {
     </AppBar>
   );
 };
+
 export default Navbar;

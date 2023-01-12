@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Navbar from './Components/Navbar/Navbar';
+import HomePage from './Components/HomePage/HomePage';
 
 
 
@@ -8,10 +9,8 @@ function App() {
   console.log(avatarClicked);
   return (
     <div className="App">
-      <Navbar
-        avatarClicked={avatarClicked}
-        setAvatarClicked={setAvatarClicked}
-      />
+      <Navbar setAvatarClicked={setAvatarClicked} />
+      <HomePage />
     </div>
   );
 }

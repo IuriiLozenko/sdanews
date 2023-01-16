@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_KEY } from "../../helpers/api";
-import { Typography, List } from "@mui/material";
+import { Typography, List, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+
 const HomePage = () => {
   const [todaysArticles, setTodaysArticles] = useState([]);
 
@@ -37,16 +39,23 @@ const HomePage = () => {
       });
   }, []);
   // FETCH + USEEFFECT TO NIE JEST NAJLEPSZY SPOSÓB NA KOMUNIKACJE Z API W REACTCIE, ALTERNATYEWA: REACT QUERY, TEN SPOSÓB JEST MIMO WSZYSTKO OK
-  return <div>
-    <Typography 
-    variant="h2" 
-    align="center" 
-    sx={{fontSize: "2rem", mt: ".8rem"}}
-    >
-      Today's hottest news:
+  return (
+    <div>
+      <Typography
+        variant="h2"
+        align="center"
+        sx={{ fontSize: "2rem", mt: ".8rem" }}
+      >
+        Today's hottest news:
       </Typography>
-      <List sx={{width:"100%", alignContent:"center"}}></List>
-  </div>;
+      <List sx={{ width: "100%", alignContent: "center" }}></List>
+      <Link to="/">
+        <Button variant="contained" sx={{ display: "block", mx: "auto" }}>
+          Empty URL
+        </Button>
+      </Link>
+    </div>
+  );
 };
 
 // TASK 12.01.2023

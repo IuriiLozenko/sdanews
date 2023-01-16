@@ -13,6 +13,9 @@ function App() {
         {/*STATIC*/}
         {/*DYNAMIC*/}
         <Routes>
+          <Route path="/" element={<h1>
+            This is empty URL
+            </h1>} />
           <Route path='/home' element={<HomePage />} />
         </Routes>
         {/*DYNAMIC*/}

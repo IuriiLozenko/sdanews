@@ -49,7 +49,7 @@ const HomePage = () => {
         Today's hottest news:
       </Typography>
       <List sx={{ width: "100%", alignContent: "center" }}></List>
-      <Link to="/">
+      <Link to="/" style={{textDecoration: "none"}}>
         <Button variant="contained" sx={{ display: "block", mx: "auto" }}>
           Empty URL
         </Button>

@@ -1,16 +1,24 @@
 import React, {useState} from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import HomePage from './Components/HomePage/HomePage';
-
-
-
 function App() {
   const [avatarClicked, setAvatarClicked] = useState<boolean>(false);
   console.log(avatarClicked);
   return (
     <div className="App">
-      <Navbar setAvatarClicked={setAvatarClicked} />
-      <HomePage />
+      <BrowserRouter>
+        {/*STATIC*/}
+        <Navbar setAvatarClicked={setAvatarClicked} />
+        {/*STATIC*/}
+        {/*DYNAMIC*/}
+        <Routes>
+          <Route path='/home' element={<HomePage />} />
+        </Routes>
+        {/*DYNAMIC*/}
+        {/*STATIC*/}
+        {/*STATIC*/}
+      </BrowserRouter>
     </div>
   );
 }

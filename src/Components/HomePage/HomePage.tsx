@@ -27,7 +27,9 @@ const HomePage = () => {
   useEffect(() => {
     axios
       .get(
-        `https://newsapi.org/v2/everything?q=world&language=en&sortBy=popularity&from=${year}-${month < 10 ? `0${month}`: month}-${day - 1}&apiKey=${API_KEY}`
+        `https://newsapi.org/v2/everything?q=world&language=en&sortBy=popularity&from=${year}-${
+          month < 10 ? `0${month}`: month
+        }-${day - 1}&apiKey=${API_KEY}`
       )
       .then((data) => {
         console.log(data.data.articles)

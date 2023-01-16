@@ -27,9 +27,10 @@ function App() {
 }
 
 export default App;
-// TASK 1 11.01.2023
-// 1. Stwórz stan avatarClicked w App.tsx. Wartość początkowa: false, typ useState: boolean.
-// 2. Przekaż zmienną stanową i funkcję aktualizującą stan do komponentu Navbar.
-// 3. W komponencie Navbar stwórz odpowiedni interface i odbierz propsy.
-// 4. Przy kliknięciu na avatar: jeżeli stan avatarClicked jest ustawiony na false to zmień na true. 
-//  Jeżeli jest ustawiony na true to zmień na false. Stwórz do tego odpowiednią funkcję i przypisz ją do onClicka na avatarze.
+
+//TASK 16.01.2023
+// 1. Stwórz komponent Article.tsx
+// 2. Komponent Article będzie przyjmował 2 propsy: article oraz key. Prop article to
+// obiekt artykułu pochodządzy z API a key to po prostu liczba. Stwórz interface dla
+// obiektu typu article, nazwij go ArticleObj, w środku: url to string, urlToImage to 
+//string, title to string. Sam interface użyj do otypowania propsów w Article, przyjmij je.

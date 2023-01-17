@@ -2,12 +2,13 @@ import React, {useState} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import HomePage from './Components/HomePage/HomePage';
+import RegisterForm from './Components/RegisterForm/RegisterForm';
 function App() {
   const [avatarClicked, setAvatarClicked] = useState<boolean>(false);
-  console.log(avatarClicked);
   return (
     <div className="App">
       <BrowserRouter>
+      <RegisterForm />
         {/*STATIC*/}
         <Navbar setAvatarClicked={setAvatarClicked} />
         {/*STATIC*/}

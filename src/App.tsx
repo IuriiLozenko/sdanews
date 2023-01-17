@@ -34,3 +34,22 @@ export default App;
 // obiekt artykułu pochodządzy z API a key to po prostu liczba. Stwórz interface dla
 // obiektu typu article, nazwij go ArticleObj, w środku: url to string, urlToImage to 
 //string, title to string. Sam interface użyj do otypowania propsów w Article, przyjmij je.
+
+
+//Part 2
+// 3. JSX:
+// - wszystko ma być obwinięte w komponent ListItem (MUI)
+// - w środku ListItem wszystko ma być obwinięte 
+//komponentem Card (MUI), props komponentu Card: 
+//variant na outlined, w sx'ach margines dolny na 10px
+// - w środku Card wszystko obwinięte tagiem a (zwykły 
+//anchor z htmla), props: href na url z artykułu który zostaw 
+//przekazany propsem do Article.tsx, target na __blank, w 
+//style textDecoration none
+// - w środku <a> ma się znaleźć tag img (zwykły 
+//htmlowy) z src ustawionym na urlToImage z artykułu z 
+//propsów, alt ustawiony na title artykułu z propsów i w 
+//style width ustawione na 100%
+// - obok tagu img ma się znaleźć komponent 
+//ListItemText (z MUI) w sx'ach color black, mx 5%. W 
+//środku ListItemText wyświetl tytuł artykułu z propsów.

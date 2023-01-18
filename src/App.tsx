@@ -3,6 +3,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import HomePage from './Components/HomePage/HomePage';
 import RegisterForm from './Components/RegisterForm/RegisterForm';
+import LoginForm from './Components/LoginForm/LoginForm';
 function App() {
   const [avatarClicked, setAvatarClicked] = useState<boolean>(false);
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<h1>This is empty URL</h1>} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/register" element={<RegisterForm />} />
+          <Route path="/login" element={<LoginForm />}/>
         </Routes>
         {/*DYNAMIC*/}
         {/*STATIC*/}

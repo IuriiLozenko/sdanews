@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
 
 interface NavbarProps {
   setAvatarClicked: (val: boolean | ((val: boolean) => boolean)) => void; // chce podac albo boolean, albo funkcję która z kolei będzie przyjmować boolean i zwracać boolean
@@ -124,9 +125,11 @@ const Navbar = ({ setAvatarClicked }: NavbarProps) => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <IconButton sx={{ p: 0 }} onClick={toggleAvatarClicked}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-            </IconButton>
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <IconButton sx={{ p: 0 }} onClick={toggleAvatarClicked}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Link>
           </Box>
         </Toolbar>
       </Container>

@@ -3,26 +3,30 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import HomePage from './Components/HomePage/HomePage';
 import RegisterForm from './Components/RegisterForm/RegisterForm';
-import LoginForm from './Components/LoginForm/LoginForm';
 import LoginPage from './Components/LoginPage/LoginPage';
-function App() {
+import ExcerciseForm from './Components/ExcerciseForm/ExcerciseForm';
+
+function App () {
   const [avatarClicked, setAvatarClicked] = useState<boolean>(false);
+  const [usersFirstName, setUsersFirstName] = useState<string>("");
+  console.log(usersFirstName);
   return (
     <div className="App">
       <BrowserRouter>
-        {/*STATIC*/}
+        {/* STATIC */}
         <Navbar setAvatarClicked={setAvatarClicked} />
-        {/*STATIC*/}
-        {/*DYNAMIC*/}
+        <ExcerciseForm setUsersFirstName={setUsersFirstName} />
+        {/* STATIC */}
+        {/* DYNAMIC */}
         <Routes>
-          <Route path="/" element={<h1>This is empty URL</h1>} />
+          <Route path="/" element={<h1>To jest pusty url</h1>} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/register" element={<RegisterForm />} />
-          <Route path="/login" element={<LoginPage />}/>
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
-        {/*DYNAMIC*/}
-        {/*STATIC*/}
-        {/*STATIC*/}
+        {/* DYNAMIC */}
+        {/* STATIC */}
+        {/* STATIC */}
       </BrowserRouter>
     </div>
   );
@@ -30,28 +34,13 @@ function App() {
 
 export default App;
 
-//TASK 16.01.2023
-// 1. Stwórz komponent Article.tsx
-// 2. Komponent Article będzie przyjmował 2 propsy: article oraz key. Prop article to
-// obiekt artykułu pochodządzy z API a key to po prostu liczba. Stwórz interface dla
-// obiektu typu article, nazwij go ArticleObj, w środku: url to string, urlToImage to 
-//string, title to string. Sam interface użyj do otypowania propsów w Article, przyjmij je.
-
-
-//Part 2
-// 3. JSX:
-// - wszystko ma być obwinięte w komponent ListItem (MUI)
-// - w środku ListItem wszystko ma być obwinięte 
-//komponentem Card (MUI), props komponentu Card: 
-//variant na outlined, w sx'ach margines dolny na 10px
-// - w środku Card wszystko obwinięte tagiem a (zwykły 
-//anchor z htmla), props: href na url z artykułu który zostaw 
-//przekazany propsem do Article.tsx, target na __blank, w 
-//style textDecoration none
-// - w środku <a> ma się znaleźć tag img (zwykły 
-//htmlowy) z src ustawionym na urlToImage z artykułu z 
-//propsów, alt ustawiony na title artykułu z propsów i w 
-//style width ustawione na 100%
-// - obok tagu img ma się znaleźć komponent 
-//ListItemText (z MUI) w sx'ach color black, mx 5%. W 
-//środku ListItemText wyświetl tytuł artykułu z propsów.
+// Task 1 19.01.2023
+// 1. Stwórz komponent ExerciseForm.
+// 2. Ten komponent ma wyświetlać formularz z dwoma inputami (TextField (MUI)), jeden 
+//na imie, drugi na nazwisko, dodaj też Button (MUI) z typem submit. Zaimportuj useForm i obsłuż formularz.
+// 3. W App.tsx stwórz stan usersFirstName, otypuj go na string, wartość początkowa "".
+// 4. Wyświetl ExerciseForm w App.tsx (statycznie/dynamicznie, nie ma to znaczenia), 
+//przekaż do ExcerciseForm funkcję aktulizującą stan usersFirstName. Nie zapomnij o interface w ExerciseForm
+// 5. Wywołuj funkcję aktulizującą stan usersFirstName w własnoręcnie napisanym handlerze, wrzucając do 
+//stanu TYLKO IMIE użytkownika.
+// 6. Zrób console.log(stan) w App.tsx żeby sprawdzić czy działa.

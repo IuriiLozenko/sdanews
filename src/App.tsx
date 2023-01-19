@@ -5,17 +5,28 @@ import HomePage from './Components/HomePage/HomePage';
 import RegisterForm from './Components/RegisterForm/RegisterForm';
 import LoginPage from './Components/LoginPage/LoginPage';
 import ExcerciseForm from './Components/ExcerciseForm/ExcerciseForm';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './helpers/firebaseConfig';
 
 function App () {
   const [avatarClicked, setAvatarClicked] = useState<boolean>(false);
   const [usersFirstName, setUsersFirstName] = useState<string>("");
-  console.log(usersFirstName);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user){
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  });
+
   return (
     <div className="App">
       <BrowserRouter>
         {/* STATIC */}
-        <Navbar setAvatarClicked={setAvatarClicked} />
-        <ExcerciseForm setUsersFirstName={setUsersFirstName} />
+        <Navbar setAvatarClicked={setAvatarClicked} loggedIn={loggedIn} />
+        {/* <ExcerciseForm setUsersFirstName={setUsersFirstName} /> */}
         {/* STATIC */}
         {/* DYNAMIC */}
         <Routes>
@@ -34,13 +45,3 @@ function App () {
 
 export default App;
 
-// Task 1 19.01.2023
-// 1. Stwórz komponent ExerciseForm.
-// 2. Ten komponent ma wyświetlać formularz z dwoma inputami (TextField (MUI)), jeden 
-//na imie, drugi na nazwisko, dodaj też Button (MUI) z typem submit. Zaimportuj useForm i obsłuż formularz.
-// 3. W App.tsx stwórz stan usersFirstName, otypuj go na string, wartość początkowa "".
-// 4. Wyświetl ExerciseForm w App.tsx (statycznie/dynamicznie, nie ma to znaczenia), 
-//przekaż do ExcerciseForm funkcję aktulizującą stan usersFirstName. Nie zapomnij o interface w ExerciseForm
-// 5. Wywołuj funkcję aktulizującą stan usersFirstName w własnoręcnie napisanym handlerze, wrzucając do 
-//stanu TYLKO IMIE użytkownika.
-// 6. Zrób console.log(stan) w App.tsx żeby sprawdzić czy działa.

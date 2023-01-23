@@ -1,7 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Card, Typography, Button } from "@mui/material";
-
+import { auth, storage } from '../../helpers/firebaseConfig';
+import { ref, uploadBytes } from "firebase/storage";
 
 interface ProfilePhotoFormValues {
     profilePhoto: FileList;
@@ -11,7 +12,15 @@ interface ProfilePhotoFormValues {
 const ProfilePhotoForm = () => {
     const { register, handleSubmit } = useForm<ProfilePhotoFormValues>();
 
-    const uploadPhoto = (data: ProfilePhotoFormValues) => {};
+    const uploadPhoto = (data: ProfilePhotoFormValues) => {
+        const photo = data.profilePhoto[0];
+
+        if (auth.currentUser) {
+            const storageRef = ref(storage, `/users/${auth.currentUser.uid}/profile`);
+            uploadBytes(storageRef, photo);
+        }
+    };
+    
 
   return (
     <form onSubmit={handleSubmit(uploadPhoto)}>
@@ -69,3 +78,11 @@ export default ProfilePhotoForm
 // c) Button (MUI) variant contained, type submit, sx: display block, mx auto. Text: Upload
 // 5. Interface do useForm'a:
 // input type file zwraca typ FileList, otypuj profilePhoto jako FileList
+
+// Task 1 23.01.2023 c.d.
+// 1. Z parametru data wyizoluj sam obiekt zdjęcia, console.log(data) i sprawdź co to jest.
+// Do zmiennej zapisz sam pojedyńczy obiekt zdjęcia.
+// 2. Stwórz ifa, w którym sprawdzisz czy auth.currentUser istnieje.
+// 3. W tym ifie stwórz kod odpowiedzialny za wrzucanie zdjęcia do storage'u. 
+//Ścieżka do pliku (ścieżka w refie): '/users/${auth.currentUser.uid}/profile'
+// 4. Cały ProfilePhotoForm wyświetl w UserPage pomiędzy mailem a log outem.

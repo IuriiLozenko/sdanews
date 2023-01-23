@@ -2,6 +2,7 @@ import { Typography, Button } from '@mui/material';
 import React from 'react';
 import { auth } from "../../helpers/firebaseConfig";
 import { signOut } from 'firebase/auth';
+import ProfilePhotoForm from '../ProfilePhotoForm/ProfilePhotoForm';
 
 interface UserPageProps {
   loggedIn: boolean
@@ -29,6 +30,7 @@ const UserPage = ({loggedIn}: UserPageProps) => {
         sx={{ fontSize: "1rem", my: "1rem", mx: "auto" }}>
         Your email: {auth.currentUser.email}
       </Typography>
+      <ProfilePhotoForm />
       <Button 
       variant="outlined"
       sx={{display: "block", mx: "auto", my: "1rem" }}

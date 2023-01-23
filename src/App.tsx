@@ -7,6 +7,7 @@ import LoginPage from './Components/LoginPage/LoginPage';
 import ExcerciseForm from './Components/ExcerciseForm/ExcerciseForm';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './helpers/firebaseConfig';
+import UserPage from './Components/UserPage/UserPage';
 
 function App () {
   const [avatarClicked, setAvatarClicked] = useState<boolean>(false);
@@ -34,6 +35,7 @@ function App () {
           <Route path="/home" element={<HomePage />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/user" element={<UserPage loggedIn={loggedIn}/>} />
         </Routes>
         {/* DYNAMIC */}
         {/* STATIC */}

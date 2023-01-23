@@ -128,13 +128,16 @@ const Navbar = ({ setAvatarClicked, loggedIn }: NavbarProps) => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Link to="/login" style={{ textDecoration: "none" }}>
-              
-              {loggedIn ?  (<IconButton sx={{ p: 0 }} onClick={toggleAvatarClicked}>
+              {/* turnary operator, renderowanie warunkowe typ I */}
+              {loggedIn ?  
+              (<IconButton sx={{ p: 0 }} onClick={toggleAvatarClicked}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
                ) : (
               <Button variant="contained">Log in</Button>
               )}
+              {/* operator &&, renderowanie warunkowe typ II */}
+              {/* {loggedIn && <span>Hello!</span>} */}
             </Link>
           </Box>
         </Toolbar>

@@ -130,7 +130,7 @@ const Navbar = ({ setAvatarClicked, loggedIn }: NavbarProps) => {
             <Link to="/login" style={{ textDecoration: "none" }}>
               {/* turnary operator, renderowanie warunkowe typ I */}
               {loggedIn ?  
-              (<IconButton sx={{ p: 0 }} onClick={toggleAvatarClicked}>
+              (<IconButton sx={{ p: 0 }} >
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
                ) : (

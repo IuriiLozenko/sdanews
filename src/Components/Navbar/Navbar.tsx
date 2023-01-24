@@ -11,41 +11,52 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import { auth, storage } from "../../helpers/firebaseConfig";
+import { ref, getDownloadURL} from "firebase/storage";
 
 interface NavbarProps {
-  setAvatarClicked: (val: boolean | ((val: boolean) => boolean)) => void;
-  // chce podac albo boolean, albo funkcję która z kolei będzie przyjmować boolean i zwracać boolean
   loggedIn: boolean;
 }
 
 const pages = ["Home", "Search"];
 
-const Navbar = ({ setAvatarClicked, loggedIn }: NavbarProps) => {
+const Navbar = ({ loggedIn }: NavbarProps) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
-  const toggleAvatarClicked = () => {
-    // if (avatarClicked) setAvatarClicked(false);
-    // if (!avatarClicked) setAvatarClicked(true);
+  const [profilePhoto, setProfilePhoto] = React.useState<string>("/");
 
-    // if (avatarClicked === false) {
-    //   setAvatarClicked(true);
-    // } else {
-    //   setAvatarClicked(false);
-    // }
+  React.useEffect(() => {
+    if (loggedIn && auth.currentUser) {
+      const storageRef = ref(storage, `/users/${auth.currentUser.uid}/profile`);
+      getDownloadURL(storageRef).then((url) => {
+        setProfilePhoto(url);
+      });
+    }
+  }, [loggedIn]);
 
-    // arr.map((el, i, arr) => {})
-    // arr.forEach(el => {})
-    const updateAvatarStateUsingPreviousState = (
-      previousAvatarState: boolean
-    ) => {
-      return !previousAvatarState;
-    };
-    // setCount(previousCount => previousCount + 1)
-    // setCount(count + 1)
+  // const toggleAvatarClicked = () => {
+  //   // if (avatarClicked) setAvatarClicked(false);
+  //   // if (!avatarClicked) setAvatarClicked(true);
 
-    setAvatarClicked(updateAvatarStateUsingPreviousState);
-  };
+  //   // if (avatarClicked === false) {
+  //   //   setAvatarClicked(true);
+  //   // } else {
+  //   //   setAvatarClicked(false);
+  //   // }
+
+  //   // arr.map((el, i, arr) => {})
+  //   // arr.forEach(el => {})
+  //   const updateAvatarStateUsingPreviousState = (
+  //     previousAvatarState: boolean
+  //   ) => {
+  //     return !previousAvatarState;
+  //   };
+  //   // setCount(previousCount => previousCount + 1)
+  //   // setCount(count + 1)
+
+  //   setAvatarClicked(updateAvatarStateUsingPreviousState);
+  // };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -88,11 +99,24 @@ const Navbar = ({ setAvatarClicked, loggedIn }: NavbarProps) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {/* {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
+              <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Home</Typography>
+                </MenuItem>
+              </Link>
+              <Link
+                to="/search"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Search</Typography>
+                </MenuItem>
+              </Link>
             </Menu>
           </Box>
 
@@ -114,27 +138,19 @@ const Navbar = ({ setAvatarClicked, loggedIn }: NavbarProps) => {
           >
             SDA News
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Link to="/login" style={{ textDecoration: "none" }}>
+            <Link
+              to={`${loggedIn ? "/user" : "/login"}`}
+              style={{ textDecoration: "none" }}
+            >
               {/* turnary operator, renderowanie warunkowe typ I */}
-              {loggedIn ?  
-              (<IconButton sx={{ p: 0 }} >
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-               ) : (
-              <Button variant="contained">Log in</Button>
+              {loggedIn ? (
+                <IconButton sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src={profilePhoto} />
+                </IconButton>
+              ) : (
+                <Button variant="contained">Log in</Button>
               )}
               {/* operator &&, renderowanie warunkowe typ II */}
               {/* {loggedIn && <span>Hello!</span>} */}
@@ -146,4 +162,16 @@ const Navbar = ({ setAvatarClicked, loggedIn }: NavbarProps) => {
   );
 };
 
+
 export default Navbar;
+
+// Task 1 24.01.2023
+// 1. Stwórz stan profilePhoto, otypuj na string, wartość początkowa: "/" (stan służący do przechowywania urla do obrazka)
+// 2. Wywołanie useEffect. W listę dependencji wpisz loggedIn.
+// W UE:
+// - stworz ifa w ktrym sprawdzisz czy loggedIn jest równe true i czy auth.currentUser istnieje
+// - w ifie stwórz refa przy pomocy funkcji ref (firebase/storage), ref będzie 1:1 taki sam jak 
+//w profilePhotoForm. Wywołaj po tym funkcję getDownloadURL (firebase/storage) podając ref jako argument.
+// Do getDownloadURL podepnij thena, ten then w parametrze dostanie urla. Tego urla (w thenie) wrzuć do stanu profilePhoto.
+// 3. W komponencie Avatar (wyświetlenie w Navbarze na dole), zmień atrybut src na profilePhoto
+//.then((url) => {})

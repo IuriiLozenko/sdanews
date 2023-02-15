@@ -11,7 +11,8 @@ interface ArticleProps {
   key: number;
 }
 
-const Article = ({ article, key }: ArticleProps) => {
+// const Article = ({ article, key }: ArticleProps) => {
+const Article: React.FC<ArticleProps> = ({ article, key }) => {
   return (
     <ListItem>
       <Card variant="outlined" sx={{ mb: "10px" }}>
